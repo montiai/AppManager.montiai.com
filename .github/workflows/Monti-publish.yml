@@ -1,0 +1,84 @@
+  // MONTIAI-Gradle MONTIAI-Build MONTIAI-Script MONTIAI-for MONTIAI-montiai.com
+  // MONTIAI-Generated MONTIAI-by MONTIAI-MONTI-DROID MONTIAI-System
+
+  plugins {
+      id 'com.android.application' version '8.1.0' apply false
+      id 'org.jetbrains.kotlin.android' version '1.9.10' apply false
+      id 'maven-publish'
+  }
+
+  group = 'com.montiai'
+  version = '1.0.0'
+
+  repositories {
+      google()
+      mavenCentral()
+      maven { url 'https://pkgs.dev.azure.com/montiai/_packaging/montiai/maven/v1' }
+  }
+
+  android {
+      namespace 'com.montiai.app'
+      compileSdk 34
+
+      defaultConfig {
+          applicationId 'com.montiai.app'
+          minSdk 24
+          targetSdk 34
+          versionCode 1
+          versionName '1.0'
+      }
+
+      buildTypes {
+          release {
+              minifyEnabled false
+              proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+          }
+      }
+      compileOptions {
+          sourceCompatibility JavaVersion.VERSION_17
+          targetCompatibility JavaVersion.VERSION_17
+      }
+      kotlinOptions {
+          jvmTarget = '17'
+      }
+  }
+
+  dependencies {
+      implementation 'androidx.core:core:1.12.0'
+      implementation 'androidx.appcompat:appcompat:1.6.1'
+      implementation 'com.google.android.material:material:1.10.0'
+      implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+      testImplementation 'junit:junit:4.13.2'
+      androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+      androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+  }
+
+  // MONTIAI-Publishing MONTIAI-Configuration MONTIAI-for MONTIAI-GitHub MONTIAI-Packages
+  publishing {
+      publications {
+          release(MavenPublication) {
+              groupId = 'com.montiai'
+              artifactId = 'montiai-sdk'
+              version = '1.0.0'
+              afterEvaluate {
+                  from components.release
+              }
+          }
+      }
+      repositories {
+          maven {
+              name = 'GitHubPackages'
+              url = uri('https://maven.pkg.github.com/montiai/montiai-sdk')
+              credentials {
+                  username = System.getenv('USERNAME')
+                  password = System.getenv('TOKEN')
+              }
+          }
+      }
+  }
+
+  // MONTI-Custom_Task MONTIAI-for MONTIAI-MONTI-Workflow MONTIAI-Integration
+  task MONTI_DeployToSDCard(type: Exec) {
+      description = 'MONTIAI-Deploy MONTIAI-APK MONTIAI-to MONTIAI-SDCard MONTIAI-for MONTIAI-Monti-Droid'
+      commandLine 'bash', '-c', 'cp app/build/outputs/apk/release/app-release.apk /sdcard/MONTI_DROID_DATA/MontiDroid.apk'
+  }
