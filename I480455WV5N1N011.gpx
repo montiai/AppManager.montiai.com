@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="Organic Maps" xmlns="http://www.topografix.com/GPX/1/1"
+    xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3"
+    xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 https://www.topografix.com/GPX/1/1/gpx.xsd http://www.topografix.com/GPX/gpx_style/0/2 https://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 https://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd">
+<metadata>
+  <name>I480455WV5N1N011</name>
+</metadata>
+<wpt lat="37.360748" lon="-80.891802">
+  <name>Adairs Run Road</name>
+</wpt>
+<trk>
+  <name>March 9, 2026 at 3:33 PM</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkMagenta</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>9B24B2</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FF9B24B2</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="37.360522" lon="-80.892516">
+      <ele>587</ele>
+      <time>2026-03-09T18:23:30Z</time>
+    </trkpt>
+    <trkpt lat="37.360663" lon="-80.892237">
+      <ele>538</ele>
+      <time>2026-03-09T19:30:04Z</time>
+    </trkpt>
+    <trkpt lat="37.36065" lon="-80.892261">
+      <ele>538</ele>
+      <time>2026-03-09T19:30:11Z</time>
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>March 9, 2026 at 3:34 PM</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkGray</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>804633</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FF804633</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="37.360725" lon="-80.892657">
+      <ele>538</ele>
+      <time>2026-03-09T19:33:11Z</time>
+    </trkpt>
+    <trkpt lat="37.360537" lon="-80.892517">
+      <ele>538</ele>
+      <time>2026-03-09T19:33:19Z</time>
+    </trkpt>
+  </trkseg>
+</trk>
+</gpx>
