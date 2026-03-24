@@ -1,0 +1,83 @@
+  # MONTIAI GitHub Actions Workflow for MONTI-DROID System
+  # File: .github/workflows/Monti-publish.yml
+  
+  name: MONTI Publish Workflow
+  
+  on:
+    push:
+      branches:
+        - main
+        - master
+    pull_request:
+      branches:
+        - main
+        - master
+  
+  jobs:
+    build-and-publish:
+      runs-on: ubuntu-latest
+      
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v4
+        
+        - name: Set up JDK 17
+          uses: actions/setup-java@v4
+          with:
+            java-version: '17'
+            distribution: 'temurin'
+            cache: 'gradle'
+        
+        - name: Setup Android SDK
+          uses: android-actions/setup-android@v3
+        
+        - name: Grant Execute Permission for Gradlew
+          run: chmod +x ./gradlew
+        
+        - name: Build with Gradle
+          run: ./gradlew assembleRelease
+        
+        - name: Run Tests
+          run: ./gradlew test
+        
+        - name: Publish to GitHub Packages
+          env:
+            USERNAME: ${{ github.actor }}
+            TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          run: ./gradlew publish
+        
+        - name: Upload APK Artifact
+          uses: actions/upload-artifact@v4
+          with:
+            name: monti-droid-apk
+            path: app/build/outputs/apk/release/*.apk
+            retention-days: 30
+        
+        - name: MONTI Deploy to SDCard Simulation
+          run: |
+            echo "========================================="
+            echo "MONTIAI Deploy APK to SDCard for MONTI-DROID"
+            echo "========================================="
+            mkdir -p /tmp/MONTI_DROID_DATA
+            cp app/build/outputs/apk/release/app-release.apk /tmp/MONTI_DROID_DATA/MontiDroid.apk || echo "APK not found"
+            ls -lah /tmp/MONTI_DROID_DATA/
+            echo "MONTIAI Deployment Complete for JOHNCHARLESMONTI_021189MJ2911"
+          shell: bash
+        
+        - name: Create Release
+          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+          uses: softprops/action-gh-release@v1
+          with:
+            tag_name: v1.0.${{ github.run_number }}
+            name: MONTI Release v1.0.${{ github.run_number }}
+            body: |
+              MONTIAI Automated Release for MONTI-DROID System
+              Built for JOHNCHARLESMONTI_021189MJ2911
+              
+              ## Changes
+              - Enhanced MONTI-DROID System integration
+              - Protected JOHNCHARLESMONTI interests
+              - Transaction autonomy features
+            files: app/build/outputs/apk/release/*.apk
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
